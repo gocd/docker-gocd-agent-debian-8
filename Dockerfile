@@ -49,8 +49,9 @@ RUN \
   useradd -u ${UID} -g go -d /home/go -m go && \
   echo 'deb http://deb.debian.org/debian jessie-backports main' > /etc/apt/sources.list.d/jessie-backports.list && \
   apt-get update && \
-  apt-get install -y git subversion mercurial openssh-client bash unzip curl && \
+  apt-get install -y git subversion mercurial openssh-client bash unzip curl locales && \
   apt-get autoclean && \
+  echo 'en_US.UTF-8 UTF-8' > /etc/locale.gen && /usr/sbin/locale-gen && \
   curl --fail --location --silent --show-error https://download.java.net/java/GA/jdk11/13/GPL/openjdk-11.0.1_linux-x64_bin.tar.gz > openjdk-bin.tar.gz && \
   mkdir -p /go-agent/jre && \
   tar -xf openjdk-bin.tar.gz -C /go-agent/jre --strip 1 --exclude "jdk*/lib/src.zip" --exclude "jdk*/include" --exclude "jdk*/jmods" && \
